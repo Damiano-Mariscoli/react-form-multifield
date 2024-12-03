@@ -1,0 +1,16 @@
+.containerMd{
+    width: 1500px;
+    margin-bottom: 100px;
+}
+
+.row{
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.dFlex{
+    display: flex;
+}
+.flexCenter{
+    justify-content: center;
+}
