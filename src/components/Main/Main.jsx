@@ -26,7 +26,7 @@ export default function Main() {
     title: "",
     content: "",
     image: "",
-    published: false,
+    published: true,
     tags: [],
   });
   function handleFormData(e) {
@@ -43,12 +43,13 @@ export default function Main() {
       id: Date.now(),
       title: formData.title,
       content: formData.content,
-      tags: formData.tags,
+      tags: [formData.tags],
       published: formData.published,
     };
     console.log(post);
 
-    post.published ?? setPublishedPosts([...publishedPosts, post]);
+    setPublishedPosts([...publishedPosts, post]);
+
     console.log(publishedPosts);
     console.log(formData);
   }
@@ -85,10 +86,60 @@ export default function Main() {
             />
             <label htmlFor="avaiable">
               <select onChange={handleFormData} name="published" id="">
-                <option value="true">Published</option>
-                <option value="false">Not published</option>
+                <option value={true}>Published</option>
+                <option value={false}>Not published</option>
               </select>
             </label>
+            <ul>
+              <li>
+                <label htmlFor="tag-html">
+                  <input
+                    name="tags"
+                    type="checkbox"
+                    id="tag-html"
+                    value="HTML"
+                    onChange={handleFormData}
+                  />
+                  HTML
+                </label>
+              </li>
+              <li>
+                <label htmlFor="tag-css">
+                  <input
+                    name="tags"
+                    type="checkbox"
+                    id="tag-css"
+                    value="CSS"
+                    onChange={handleFormData}
+                  />
+                  CSS
+                </label>
+              </li>
+              <li>
+                <label htmlFor="tag-php">
+                  <input
+                    name="tags"
+                    type="checkbox"
+                    id="tag-php"
+                    value="PHP"
+                    onChange={handleFormData}
+                  />
+                  PHP
+                </label>
+              </li>
+              <li>
+                <label htmlFor="tag-js">
+                  <input
+                    name="tags"
+                    type="checkbox"
+                    id="tag-js"
+                    value="JavaScript"
+                    onChange={handleFormData}
+                  />
+                  JavaScript
+                </label>
+              </li>
+            </ul>
 
             <Button text="Salva" />
           </form>
