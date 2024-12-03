@@ -5,13 +5,32 @@ import Tags from "../tags/Tags.jsx";
 import { useState } from "react";
 import Button from "../Button/Button.jsx";
 
+const formDataInit = {
+  title: "",
+  content: "",
+  image: "",
+  test: "",
+  published: null,
+  tags: [],
+};
+
 export default function Main() {
-  const [publishedPosts, setPublishedPosts] = useState(
-    posts.filter((post) => post.published === true)
-  );
+  const [publishedPosts, setPublishedPosts] = useState(posts);
   const tags = [];
 
   posts.forEach((post) => {
+    <div className="container">
+      <div className="row">
+        {publishedPosts.map(
+          (el) =>
+            el.published ? ( // Controlla se il post è pubblicato
+              <div key={el.id} className="col-4">
+                <PostCard onDelete={() => deletePost(el.id)} post={el} />
+              </div>
+            ) : null // Se il post non è pubblicato, non restituisce nulla
+        )}
+      </div>
+    </div>;
     const postTags = post.tags;
 
     postTags.forEach((tag) => {
@@ -22,15 +41,9 @@ export default function Main() {
     });
   });
 
-  const [formData, setFormData] = useState({
-    title: "",
-    content: "",
-    image: "",
-    published: true,
-    tags: [],
-  });
+  const [formData, setFormData] = useState(formDataInit);
   function handleFormData(e) {
-    console.log(formData);
+    console.log(formData, [e.target.name, e.target.value]);
     setFormData((formData) => ({
       ...formData,
       [e.target.name]: e.target.value,
@@ -44,12 +57,13 @@ export default function Main() {
       title: formData.title,
       content: formData.content,
       tags: [formData.tags],
+      image: formData.image,
       published: formData.published,
     };
     console.log(post);
 
     setPublishedPosts([...publishedPosts, post]);
-
+    setFormData(formDataInit);
     console.log(publishedPosts);
     console.log(formData);
   }
@@ -60,6 +74,7 @@ export default function Main() {
 
   return (
     <main>
+      <pre>{JSON.stringify(formData)}</pre>
       <section className={style.section}>
         <div className="container">
           <form onSubmit={addPost} action="" className="inline-form">
@@ -86,6 +101,7 @@ export default function Main() {
             />
             <label htmlFor="avaiable">
               <select onChange={handleFormData} name="published" id="">
+                <option value=""></option>
                 <option value={true}>Published</option>
                 <option value={false}>Not published</option>
               </select>
@@ -127,19 +143,18 @@ export default function Main() {
                   PHP
                 </label>
               </li>
-              <li>
-                <label htmlFor="tag-js">
-                  <input
-                    name="tags"
-                    type="checkbox"
-                    id="tag-js"
-                    value="JavaScript"
-                    onChange={handleFormData}
-                  />
-                  JavaScript
-                </label>
-              </li>
+              <li></li>
             </ul>
+            <label htmlFor="tag-js">
+              <input
+                name="tags"
+                type="checkbox"
+                id="tag-js"
+                value="JavaScript"
+                onChange={handleFormData}
+              />
+              JavaScript
+            </label>
 
             <Button text="Salva" />
           </form>
@@ -152,11 +167,17 @@ export default function Main() {
         </div>
         <div className="container">
           <div className="row">
-            {publishedPosts.map((el) => (
-              <div key={el.id} className="col-4">
-                <PostCard onDelete={() => deletePost(el.id)} post={el} />
-              </div>
-            ))}
+            {publishedPosts.map((el) => {
+              console.log(el.published);
+              // Controlla se il post è pubblicato
+              if (el.published === true) {
+                return (
+                  <div key={el.id} className="col-4">
+                    <PostCard onDelete={() => deletePost(el.id)} post={el} />
+                  </div>
+                );
+              }
+            })}
           </div>
         </div>
       </section>

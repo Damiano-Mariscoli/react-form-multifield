@@ -5,15 +5,9 @@ import Tags from "../tags/Tags";
 import TrashIcon from "../ui/trash-icon";
 
 export default function PostCard({ onDelete = () => {}, post = {} }) {
-  const {
-    title,
-    image,
-    content,
-    tags,
-    // published
-  } = post;
+  const { title, image, content, tags, published } = post;
 
-  console.log(post);
+  //console.log(post);
 
   // function callback () {
   //   console.log('elimina questo post')
