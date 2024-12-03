@@ -1,0 +1,12 @@
+
+.footerBar {
+    background-color: #393939;
+    color: white;
+    height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+}
+
+
