@@ -41,8 +41,7 @@ export default function Main() {
     const post = {
       id: Date.now(),
       title: formData.title,
-      content:
-        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Velit animi unde quasi enim non esse ratione voluptas voluptate, officiis veritatis magni blanditiis possimus nobis cum id inventore corporis deserunt hic.",
+      content: formData.content,
       tags: tags || [],
       published: true,
     };
@@ -67,6 +66,13 @@ export default function Main() {
               value={formData.title}
               onChange={handleFormData}
               placeholder="Titolo del post"
+            />
+            <input
+              type="text"
+              name="content"
+              value={formData.content}
+              onChange={handleFormData}
+              placeholder="Contenuto del post"
             />
 
             <Button text="Salva" />
