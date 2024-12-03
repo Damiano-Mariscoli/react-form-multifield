@@ -26,6 +26,7 @@ export default function Main() {
     title: "",
     content: "",
     image: "",
+    published: false,
     tags: [],
   });
   function handleFormData(e) {
@@ -42,11 +43,12 @@ export default function Main() {
       id: Date.now(),
       title: formData.title,
       content: formData.content,
-      tags: tags || [],
-      published: true,
+      tags: formData.tags,
+      published: formData.published,
     };
     console.log(post);
-    setPublishedPosts([...publishedPosts, post]);
+
+    post.published ?? setPublishedPosts([...publishedPosts, post]);
     console.log(publishedPosts);
     console.log(formData);
   }
@@ -81,6 +83,12 @@ export default function Main() {
               onChange={handleFormData}
               placeholder="URL del post"
             />
+            <label htmlFor="avaiable">
+              <select onChange={handleFormData} name="published" id="">
+                <option value="true">Published</option>
+                <option value="false">Not published</option>
+              </select>
+            </label>
 
             <Button text="Salva" />
           </form>
