@@ -74,6 +74,13 @@ export default function Main() {
               onChange={handleFormData}
               placeholder="Contenuto del post"
             />
+            <input
+              type="text"
+              name="image"
+              value={formData.image}
+              onChange={handleFormData}
+              placeholder="URL del post"
+            />
 
             <Button text="Salva" />
           </form>

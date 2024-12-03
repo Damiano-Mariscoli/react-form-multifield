@@ -13,7 +13,7 @@ export default function PostCard({ onDelete = () => {}, post = {} }) {
     // published
   } = post;
 
-  // console.log(title, image, tags, content);
+  console.log(post);
 
   // function callback () {
   //   console.log('elimina questo post')
