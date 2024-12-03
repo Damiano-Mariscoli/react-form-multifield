@@ -13,7 +13,6 @@ export default function Main() {
 
   posts.forEach((post) => {
     const postTags = post.tags;
-    console.log(postTags);
 
     postTags.forEach((tag) => {
       if (!tags.includes(tag)) {
@@ -23,7 +22,6 @@ export default function Main() {
     });
   });
 
-  const [title, setTitle] = useState("");
   const [formData, setFormData] = useState({
     title: "",
     content: "",
@@ -31,36 +29,32 @@ export default function Main() {
     tags: [],
   });
   function handleFormData(e) {
+    console.log(formData);
     setFormData((formData) => ({
       ...formData,
-      [e.target.title]: e.target.value,
+      [e.target.name]: e.target.value,
     }));
   }
   function addPost(e) {
     e.preventDefault();
 
-    const newTitle = title.trim();
-    if (newTitle === "") return;
-
     const post = {
       id: Date.now(),
-      title,
-      image: undefined /* compila questo campo */,
+      title: formData.title,
       content:
         "Lorem ipsum dolor sit amet consectetur adipisicing elit. Velit animi unde quasi enim non esse ratione voluptas voluptate, officiis veritatis magni blanditiis possimus nobis cum id inventore corporis deserunt hic.",
-      tags: [],
+      tags: tags || [],
       published: true,
     };
-
+    console.log(post);
     setPublishedPosts([...publishedPosts, post]);
-    setTitle("");
+    console.log(publishedPosts);
+    console.log(formData);
   }
 
   function deletePost(id) {
     setPublishedPosts(publishedPosts.filter((post) => post.id !== id));
   }
-
-  console.log(formData);
 
   return (
     <main>
